@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import logo from '../../assets/logo.svg'
-import './App.css'
+import MyAwesomeReactComponent from '../MaterialUi';
+// import './App.css'
 
 import ApolloClient, {createNetworkInterface} from 'apollo-client'
 import {graphql, ApolloProvider} from 'react-apollo'
@@ -45,10 +45,10 @@ class App extends Component {
       <ApolloProvider client={client}>
         <div className="App">
           <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
             <h2>Welcome to Apollo</h2>
           </div>
           <QuestionListWithData />
+            <MyAwesomeReactComponent />
         </div>
       </ApolloProvider>
     )
