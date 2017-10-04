@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react'
+import logo from '../../assets/logo.svg'
+import './App.css'
 
-import ApolloClient, { createNetworkInterface } from 'apollo-client';
-import { graphql, ApolloProvider } from 'react-apollo';
-import gql from 'graphql-tag';
+import ApolloClient, {createNetworkInterface} from 'apollo-client'
+import {graphql, ApolloProvider} from 'react-apollo'
+import gql from 'graphql-tag'
 
 const networkInterface = createNetworkInterface({
   uri: 'https://umfquiz.herokuapp.com/graphql', //process.env.GRAPHQL_ENDPOINT, // Server URL (must be absolute)
@@ -12,23 +12,21 @@ const networkInterface = createNetworkInterface({
     // Additional fetch() options like credentials or headers
     credentials: 'cross-origin'
   }
-});
+})
 
 const client = new ApolloClient({
-  networkInterface: networkInterface,
-});
+  networkInterface: networkInterface
+})
 
-const QuestionList = ({ data: {loading, error, questions }}) => {
+const QuestionList = ({data: {loading, error, questions}}) => {
   if (loading) {
-    return <p>Loading ...</p>;
+    return <p>Loading ...</p>
   }
   if (error) {
-    return <p>{error.message}</p>;
+    return <p>{error.message}</p>
   }
-  return <ul>
-    { questions.map( ch => <li key={ch.id}>{ch.body}</li> ) }
-  </ul>;
-};
+  return <ul>{questions.map(ch => <li key={ch.id}>{ch.body}</li>)}</ul>
+}
 
 const QuestionListQuery = gql`
   {
@@ -37,9 +35,9 @@ const QuestionListQuery = gql`
       body
     }
   }
-`;
+`
 
-const QuestionListWithData = graphql(QuestionListQuery)(QuestionList);
+const QuestionListWithData = graphql(QuestionListQuery)(QuestionList)
 
 class App extends Component {
   render() {
@@ -53,8 +51,8 @@ class App extends Component {
           <QuestionListWithData />
         </div>
       </ApolloProvider>
-    );
+    )
   }
 }
 
-export default App;
+export default App
