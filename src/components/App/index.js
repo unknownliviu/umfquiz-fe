@@ -7,7 +7,7 @@ import {graphql, ApolloProvider} from 'react-apollo'
 import gql from 'graphql-tag'
 
 const networkInterface = createNetworkInterface({
-  uri: 'https://umfquiz.herokuapp.com/graphql', //process.env.GRAPHQL_ENDPOINT, // Server URL (must be absolute)
+  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
   opts: {
     // Additional fetch() options like credentials or headers
     credentials: 'cross-origin'
