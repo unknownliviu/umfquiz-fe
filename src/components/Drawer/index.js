@@ -24,6 +24,7 @@ export default class DrawerUndockedExample extends React.Component {
           open={ this.props.isOpened}
           onRequestChange={this.props.onRequestChange}
         >
+          <MenuItem><Link to="/" onClick={this.props.handleClose}>Home</Link></MenuItem>
           <MenuItem><Link to="/about" onClick={this.props.handleClose}>About</Link></MenuItem>
           <MenuItem><Link to="/salam" onClick={this.props.handleClose}>Florin Salam</Link></MenuItem>
         </Drawer>

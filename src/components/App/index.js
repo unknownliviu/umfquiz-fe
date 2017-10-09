@@ -45,10 +45,10 @@ class App extends Component {
       <ApolloProvider client={client}>
         <div className="App">
           <div className="App-header">
-            <h2>Welcome to Apollo</h2>
+            <h2>UMFQuizz app</h2>
           </div>
-          <QuestionListWithData />
-            <MyAwesomeReactComponent />
+          {/* <QuestionListWithData /> */}
+          <MyAwesomeReactComponent />
         </div>
       </ApolloProvider>
     )
