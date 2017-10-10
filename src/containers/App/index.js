@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 // import './App.css'
-import MyAwesomeReactComponent from '../MaterialUi'
+import MyAwesomeReactComponent from '../../components/MaterialUi'
 
 import {graphql} from 'react-apollo'
 import gql from 'graphql-tag'

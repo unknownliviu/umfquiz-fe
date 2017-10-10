@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import MyAwesomeReactComponent from '../MaterialUi'
+import MyAwesomeReactComponent from '../../components/MaterialUi'
 
 export default class QuizzesContainer extends Component {
   constructor(props) {
