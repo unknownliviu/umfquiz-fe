@@ -1,15 +1,19 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import {render} from 'react-dom'
 import Router from './Router'
-import registerServiceWorker from './registerServiceWorker'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import './index.css'
+import store from './store'
+import {ApolloProvider} from 'react-apollo'
+import client from './apollo'
 
-const Wrapper = function () {
-    return <MuiThemeProvider>
-         <Router />
-     </MuiThemeProvider>   
-}
+const target = document.querySelector('#root')
 
-ReactDOM.render(<Wrapper />, document.getElementById('root'))
-registerServiceWorker()
+render(
+  <MuiThemeProvider>
+    <ApolloProvider store={store} client={client}>
+      <Router />
+    </ApolloProvider>
+  </MuiThemeProvider>,
+  target
+)
