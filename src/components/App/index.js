@@ -1,22 +1,9 @@
 import React, {Component} from 'react'
-import MyAwesomeReactComponent from '../MaterialUi';
 // import './App.css'
+import MyAwesomeReactComponent from '../MaterialUi'
 
-import ApolloClient, {createNetworkInterface} from 'apollo-client'
-import {graphql, ApolloProvider} from 'react-apollo'
+import {graphql} from 'react-apollo'
 import gql from 'graphql-tag'
-
-const networkInterface = createNetworkInterface({
-  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
-  opts: {
-    // Additional fetch() options like credentials or headers
-    credentials: 'cross-origin'
-  }
-})
-
-const client = new ApolloClient({
-  networkInterface: networkInterface
-})
 
 const QuestionList = ({data: {loading, error, questions}}) => {
   if (loading) {
@@ -42,15 +29,13 @@ const QuestionListWithData = graphql(QuestionListQuery)(QuestionList)
 class App extends Component {
   render() {
     return (
-      <ApolloProvider client={client}>
-        <div className="App">
-          <div className="App-header">
-            <h2>UMFQuizz app</h2>
-          </div>
-          {/* <QuestionListWithData /> */}
-          <MyAwesomeReactComponent />
+      <div className="App">
+        <div className="App-header">
+          <h2>UMFQuizz app</h2>
         </div>
-      </ApolloProvider>
+        <QuestionListWithData />
+        <MyAwesomeReactComponent />
+      </div>
     )
   }
 }
