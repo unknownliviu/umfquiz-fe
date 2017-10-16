@@ -1,10 +1,10 @@
 import React from 'react'
 // import {Link} from 'react-router-dom'
-import CustomAppBar from '../AppBar';
+import CustomAppBar from '../../containers/AppBar'
 
 export default () => (
   <div>
-    <CustomAppBar title="This is the header"/>
+    <CustomAppBar title="This is the header" />
     {/* <h3>This is the header. </h3>
     <Link to="/">Home</Link>
     <br />
