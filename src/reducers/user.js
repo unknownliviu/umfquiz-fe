@@ -19,13 +19,15 @@ export const Actions = {
 const INITIAL_STATE = {
   name: null,
   token: null,
+  email: null,
   loggedIn: false
 }
 
-const userLogin = (state, {name, token}) => ({
+const userLogin = (state, {name, token, email}) => ({
   ...state,
   name,
   token,
+  email,
   loggedIn: true
 })
 
