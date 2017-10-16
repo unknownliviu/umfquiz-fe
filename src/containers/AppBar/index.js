@@ -35,7 +35,11 @@ class CustomAppBar extends React.Component {
   login() {
     const {userLogin} = this.props
 
-    userLogin({name: 'Tony Stark', token: 'mark-1-umfquiz-prototype'})
+    userLogin({
+      name: 'Tony Stark',
+      token: 'mark-1-umfquiz-prototype',
+      email: 'privatise@world.peace'
+    })
   }
 
   render() {
