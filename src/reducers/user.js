@@ -32,7 +32,6 @@ const userLogin = (state, {name, token, email}) => ({
 })
 
 const userLogout = state => ({
-  ...state,
   loggedIn: false
 })
 
