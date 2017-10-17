@@ -3,6 +3,8 @@ import AppBar from 'material-ui/AppBar'
 import Drawer from '../../components/Drawer'
 import {Login, LoggedIn} from './login.js'
 import {connect} from 'react-redux'
+import {graphql} from 'react-apollo'
+import gql from 'graphql-tag'
 import {Actions} from '../../reducers/user.js'
 const userActions = Actions
 
@@ -32,14 +34,16 @@ class CustomAppBar extends React.Component {
     this.setState({drawerOpen: false})
   }
 
-  login() {
-    const {userLogin} = this.props
-
-    userLogin({
-      name: 'Tony Stark',
-      token: 'mark-1-umfquiz-prototype',
-      email: 'privatise@world.peace'
-    })
+  login(response) {
+    const {userLogin, loginMutation} = this.props
+    const {userId, name, email, userID} = response
+    console.log('response', response)
+    const payload = {
+      name,
+      token: userID,
+      email
+    }
+    loginMutation(payload).then(() => this.props.userLogin({...payload}))
   }
 
   render() {
@@ -49,12 +53,11 @@ class CustomAppBar extends React.Component {
         <AppBar
           title={this.props.title}
           onLeftIconButtonTouchTap={this.onRequestChange}
-          onRightIconButtonTouchTap={this.login}
           iconElementRight={
             user.loggedIn ? (
               <LoggedIn name={user.name} handleLogout={userLogout} />
             ) : (
-              <Login />
+              <Login handleLogin={this.login} />
             )
           }
         />
@@ -73,8 +76,36 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  userLogin: details => dispatch(userActions.userLogin(details)),
+  userLogin: details => {
+    dispatch(userActions.userLogin(details))
+  },
   userLogout: () => dispatch(userActions.userLogout())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomAppBar)
+const query = gql`
+  mutation umfUserAuth($name: String!, $email: String!, $token: String!) {
+    userAuth(
+      user: {
+        name: $name
+        email: $email
+        fb_auth_hash: $token
+        phone: "07-remove-me"
+      }
+    ) {
+      email
+    }
+  }
+`
+
+const CustomAppBarWithData = graphql(query, {
+  props: ({mutate, ownProps: {userLogin}}) => ({
+    loginMutation: user =>
+      mutate({
+        variables: {...user}
+      })
+  })
+})(CustomAppBar)
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  CustomAppBarWithData
+)
